@@ -58,7 +58,7 @@ calc_vmax <- function(data, # must include Photo, Ci, Rd, PAR, Tleaf
   
   data$C <- data$Ci
   data$Rd <- mean(data$Rd)
-  data$Q <- mean(data$Pari)
+  data$Q <- mean(data$PAR)
   gammas <- mean(calc_gammastar(temp_data$Tleaf))
   K <- calc_km_pa(data$Tleaf)
   
