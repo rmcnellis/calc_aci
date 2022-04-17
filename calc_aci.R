@@ -59,7 +59,7 @@ calc_vmax <- function(data, # must include Photo, Ci, Rd, PAR, Tleaf
   data$C <- data$Ci
   data$Rd <- mean(data$Rd)
   data$Q <- mean(data$PAR)
-  gammas <- mean(calc_gammastar(temp_data$Tleaf))
+  gammas <- mean(calc_gammastar(data$Tleaf))
   K <- calc_km_pa(data$Tleaf)
   
   vqmax_function <- Photo ~ ((((vqmax * Q) / ((vqmax / (a1 * phi1P_max)) + Q)) /
@@ -79,13 +79,10 @@ calc_vmax <- function(data, # must include Photo, Ci, Rd, PAR, Tleaf
                      start = list(vcmax = start_vmax),
                      control = nls.control(maxiter = control_maxiter, minFactor = control_minFactor))
   
-  output <- data.frame("limiting" = c("light-limited", "enzyme-limited"), 
-                       "vmax" = c(coef(vcmax_nls), coef(vqmax_nls)), 
+  output <- data.frame("vmax" = c(coef(vcmax_nls), coef(vqmax_nls)), 
                        "CI_2.5" = c(confint(vcmax_nls)[1], confint(vqmax_nls)[1]),
                        "CI_97.5" = c(confint(vcmax_nls)[2], confint(vqmax_nls)[2]))
 
   return(output)
 }
-
-calc_vmax(data = subset(aci_c3, id == "Auburn_Iopa_1"), ci_trans = 375)
 

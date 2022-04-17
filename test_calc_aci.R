@@ -1,5 +1,6 @@
 # Test A/Ci curve fitting
 
+library(ggplot2)
 source("calc_aci.R")
 
 test <- data.frame("Photo" = c(0.5, 8, 14, 20, 25, 27, 28, 30, 31, 31.5, 32, 32.8, 33, 33.8, 34, 34.6, 35, 35.3, 35.5, 36), 
